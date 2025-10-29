@@ -1,0 +1,610 @@
+@charset "utf-8";
+
+@use "./scss/reset";
+@use "./scss/font";
+@use "./scss/variables" as *;
+@use "./scss/mixin" as mixin;
+
+body {
+  background-color: $bg-color;
+  color: $font-main;
+}
+
+button.white {
+  width: 300px;
+  height: 35px;
+  border: 2px solid $font-main;
+  border-radius: $card-radius;
+  background-color: $font-sub;
+  &:hover {
+    background-color: #ccc;
+  }
+}
+
+// radio btn 영역
+  .radio {
+    @include mixin.flex-layout($gap:0.5rem);
+    label {
+      display: block;
+      width: 20px;
+      height: 20px;
+      border: 1px solid $font-main;
+      border-radius: 50%;
+    }
+  }
+
+// 모바일 사이즈를 기본으로 작업
+// header 영역
+header {
+  nav {
+    display: fixed;
+    width: 100%;
+    height: 4rem;
+    background-color: $font-sub;
+    padding: 0 2rem;
+    position: relative;
+    @include mixin.flex-layout($justify:space-between);
+    @include mixin.desktop {
+      @include mixin.flex-layout($justify:flex-start,$gap:1.5rem);
+    }
+    .t-menu-d {
+      opacity: 0;
+      height: 100%;
+      font-weight: bolder;
+      text-align: center;
+      li{
+        @include mixin.flex-layout($gap:0);
+        height: 100%;
+        border-bottom: 3px solid transparent;
+        position: relative;
+        transition: 0.3s;
+        img {
+          width: 24px;
+          transition: 0.3s;
+          margin-left: 3px;}
+        &:hover {
+          border-bottom: 3px solid $font-main;
+          img {transform: rotate(90deg);}
+        }
+        &:hover > .t-menu-d-sub {opacity: 1;}
+      }
+      @include mixin.desktop {
+        opacity: 1;
+        cursor: pointer;
+        @include mixin.flex-layout($gap:2rem);
+      }
+      .t-menu-d-sub {
+        z-index: 13;
+        background-color: $font-sub;
+        position: absolute;
+        top: 4rem;
+        left: 0;
+        font-size: small;
+        font-weight: 400;
+        width: 200px;
+        padding: 1rem;
+        opacity: 0;
+        @include mixin.flex-layout($direction:column,$align:flex-start);
+        li {
+          &:hover {
+            border-bottom: 3px solid transparent;
+            font-weight: bold;
+          }
+        }
+      }
+    }
+    label {
+      div {
+        width: 32px;
+        height: 32px;
+        background-image: url('../images/icons/menu.png');}
+    }
+    // menu-icon 클릭 반응
+    input[id=menu-check]:checked ~ .t-menu-m {opacity: 1;}
+    input[id=menu-check]:checked ~ .menu-icon > div {
+      background-image: url('../images/icons/close.png');}
+
+    .menu-icon {
+      cursor: pointer;
+      @include mixin.desktop {display: none;}
+    }
+    .t-menu-m {
+      width: 100%;
+      height: 100vh;
+      background-color: $font-sub;
+      font-size: x-large;
+      font-weight: bolder;
+      position: absolute;
+      top: 4rem;
+      right: 0;
+      padding: 3rem;
+      opacity: 0;
+      @include mixin.flex-layout($direction:column,$justify:flex-start,$align:flex-start);
+      z-index: 13;
+      li{
+        width: 100%;
+        cursor: pointer;
+        transition: 0.3s;
+        img {
+          float: right;
+          transition: 0.3s;
+        }
+        &:hover > .t-menu-m-sub {display: block;}
+        &:hover > img {transform: rotate(-90deg);}
+
+        .t-menu-m-sub {
+          font-size: medium;
+          font-weight: 400;
+          padding-left: 1rem;
+          display: none;
+          li {
+            padding: 0.1rem;
+            &:hover {font-weight: bold;}
+          }
+        }
+      }
+      @include mixin.desktop {
+        display: none;
+      }
+    }
+  }
+}
+
+// main 영역
+main {
+  padding: 2rem 0;
+  text-align: center;
+  color: $font-sub;
+  @include mixin.flex-layout($direction:column);
+  .main-item {
+    width: 80%;
+    position: relative;
+    aspect-ratio: 3/5;
+    @include mixin.tablet {
+      height: 80vh;
+    }
+    .main-img {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+      opacity: 0;
+      z-index: 10;
+      transition: 0.3s;
+      @include mixin.tablet {
+        background-position: center;
+      }
+      &:nth-of-type(1) {
+        background-image: linear-gradient(rgba(0,0,0,0.1), rgba(0,0,0,0.7)),url('../images/main-m1.png');
+        background-size: cover;
+        border-radius: $card-radius;
+        @include mixin.desktop {
+          background-image: linear-gradient(to left,rgba(0,0,0,0.1), rgba(0,0,0,0.7)),url('../images/main-1.png');
+        }
+      }
+      &:nth-of-type(2) {
+        background-image: linear-gradient(rgba(0,0,0,0.1), rgba(0,0,0,0.7)),url('../images/main-m2.png');
+        background-size: cover;
+        border-radius: $card-radius;
+        @include mixin.desktop {
+          background-image: linear-gradient(to left,rgba(0,0,0,0.1), rgba(0,0,0,0.7)),url('../images/main-2.png');
+        }
+      }
+      &:nth-of-type(3) {
+        background-image: linear-gradient(rgba(0,0,0,0.1), rgba(0,0,0,0.7)),url('../images/main-m3.png');
+        background-size: cover;
+        border-radius: $card-radius;
+        @include mixin.desktop {
+          background-image: linear-gradient(to left,rgba(0,0,0,0.1), rgba(0,0,0,0.7)),url('../images/main-3.png');
+        }
+      }
+      &:nth-of-type(4) {
+        background-image: linear-gradient(rgba(0,0,0,0.1), rgba(0,0,0,0.7)),url('../images/main-m4.png');
+        background-size: cover;
+        border-radius: $card-radius;
+        @include mixin.desktop {
+          background-image: linear-gradient(to left,rgba(0,0,0,0.1), rgba(0,0,0,0.7)),url('../images/main-4.png');
+        }
+      }
+      &:nth-of-type(5) {
+        background-image: linear-gradient(rgba(0,0,0,0.1), rgba(0,0,0,0.7)),url('../images/main-m5.png');
+        background-size: cover;
+        border-radius: $card-radius;
+        @include mixin.desktop {
+          background-image: linear-gradient(to left,rgba(0,0,0,0.1), rgba(0,0,0,0.7)),url('../images/main-5.png');
+        }
+      }
+      &:nth-of-type(6) {
+        background-image: linear-gradient(rgba(0,0,0,0.1), rgba(0,0,0,0.7)),url('../images/main-m6.png');
+        background-size: cover;
+        border-radius: $card-radius;
+        @include mixin.desktop {
+          background-image: linear-gradient(to left,rgba(0,0,0,0.1), rgba(0,0,0,0.7)),url('../images/main-6.png');
+        }
+      }
+      &:nth-of-type(7) {
+        background-image: linear-gradient(rgba(0,0,0,0.1), rgba(0,0,0,0.7)),url('../images/main-m7.png');
+        background-size: cover;
+        border-radius: $card-radius;
+        @include mixin.desktop {
+          background-image: linear-gradient(to left,rgba(0,0,0,0.1), rgba(0,0,0,0.7)),url('../images/main-7.png');
+        }
+      }
+      .main-info {
+        width: 100%;
+        padding: 10px;
+        position: absolute;
+        bottom: 30px;
+        @include mixin.flex-layout($direction:column);
+        @include mixin.desktop {
+          padding-left: 4rem;
+          width: 40%;
+          text-align: left;
+          font-size: x-large;
+          top: 0;
+          @include mixin.flex-layout($direction:column,$align:flex-start);
+        }
+      }
+    }
+  }
+}
+  // main 라디오버튼 반응처리
+  input {display: none;}
+  input[id=main1]:checked ~ .radio > label:nth-of-type(1),
+  input[id=main2]:checked ~ .radio > label:nth-of-type(2),
+  input[id=main3]:checked ~ .radio > label:nth-of-type(3),
+  input[id=main4]:checked ~ .radio > label:nth-of-type(4),
+  input[id=main5]:checked ~ .radio > label:nth-of-type(5),
+  input[id=main6]:checked ~ .radio > label:nth-of-type(6),
+  input[id=main7]:checked ~ .radio > label:nth-of-type(7) {
+    background-color: $font-main;
+  }
+  input[id=main1]:checked ~ .main-item > .main-img:nth-of-type(1) {opacity: 1; z-index: 11;}
+  input[id=main2]:checked ~ .main-item > .main-img:nth-of-type(2) {opacity: 1; z-index: 11;}
+  input[id=main3]:checked ~ .main-item > .main-img:nth-of-type(3) {opacity: 1; z-index: 11;}
+  input[id=main4]:checked ~ .main-item > .main-img:nth-of-type(4) {opacity: 1; z-index: 11;}
+  input[id=main5]:checked ~ .main-item > .main-img:nth-of-type(5) {opacity: 1; z-index: 11;}
+  input[id=main6]:checked ~ .main-item > .main-img:nth-of-type(6) {opacity: 1; z-index: 11;}
+  input[id=main7]:checked ~ .main-item > .main-img:nth-of-type(7) {opacity: 1; z-index: 11;}
+
+
+// #pick 영역
+#pick {
+  padding: 2rem 0;
+  @include mixin.flex-layout($direction:column);
+  .card {
+    width: 400px;
+    height: 400px;
+    position: relative;
+    .card-item {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+      background-position: center 340px;
+      background-size: cover;
+      border-radius: $card-radius;
+      z-index: 10;
+      opacity: 0;
+      &:nth-of-type(1) {
+        background-image: url('../images/card-1.png');
+      }
+      &:nth-of-type(2) {
+        background-image: url('../images/card-2.png');
+      }
+      &:nth-of-type(3) {
+        background-image: url('../images/card-3.png');
+      }
+      .card-info {
+        width: 100%;
+        height: 35%;
+        padding: 1rem 2rem;
+        background-color: $font-sub;
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        border-bottom-left-radius: $card-radius;
+        border-bottom-right-radius: $card-radius;
+        @include mixin.flex-layout($direction:column,$justify:space-between,$align:flex-start);
+        .txt {
+          @include mixin.flex-layout($justify:flex-start);
+          p:first-child {text-decoration: underline;}
+        }
+      }
+    }
+  }
+// pick 라디오버튼 반응처리
+input {display: none;}
+input[id=card1]:checked ~ .radio > label:nth-of-type(1),
+input[id=card2]:checked ~ .radio > label:nth-of-type(2),
+input[id=card3]:checked ~ .radio > label:nth-of-type(3) {
+  background-color: $font-main;
+}
+input[id=card1]:checked ~ .card > .card-item:nth-of-type(1) {opacity: 1; z-index: 11;}
+input[id=card2]:checked ~ .card > .card-item:nth-of-type(2) {opacity: 1; z-index: 11;}
+input[id=card3]:checked ~ .card > .card-item:nth-of-type(3) {opacity: 1; z-index: 11;}
+}
+
+// news 영역
+#news {
+  padding: 2rem 0;
+  @include mixin.flex-layout($direction:column);
+  .news {
+    @include mixin.flex-layout($direction:column);
+    width: 80%;
+    padding: 2rem;
+    background-color: $font-sub;
+    border-radius: $card-radius;
+    box-shadow: $base-shadow;
+    @include mixin.tablet {
+      width: 60%;
+      @include mixin.flex-layout($direction:column,$align:flex-start);
+    }
+    @include mixin.desktop {
+      width: 60%;
+    }
+  }
+}
+
+// story 영역
+#story {
+  padding: 2rem 0 0 0;
+  @include mixin.flex-layout($direction:column);
+  @include mixin.tablet {
+    margin: 0 auto;
+    width: 70%;
+    height: 70vh;
+    @include mixin.flex-layout($gap:0);
+    position: relative;
+  }
+  .story {
+    @include mixin.flex-layout($direction:column);
+    position: relative;
+    top: 5rem;
+    width: 80%;
+    padding: 2rem;
+    background-color: $font-sub;
+    border-radius: $card-radius;
+    box-shadow: $base-shadow;
+    z-index: 1;
+    @include mixin.tablet {
+      width: 40%;
+      height: 50vh;
+      position: absolute;
+      top: 3rem;
+      left: 6rem;
+      @include mixin.flex-layout($direction:column,$justify:space-between,$align:flex-start);
+      button {width: 80%;}
+    }
+    @include mixin.desktop {
+      width: 40%;
+      height: 50vh;
+    }
+    div {
+      p {padding: 1rem 0;}
+    }
+  }
+  .story-img {
+    width: 100%;
+    height: 500px;
+    background-image: url('../images/story.png');
+    background-position: center;
+    background-size: cover;
+    @include mixin.tablet {
+      width: 50%;
+      height: 50vh;
+      border-radius: $card-radius;
+      position: absolute;
+      right: 6rem;
+    }
+    @include mixin.desktop {
+      height: 50vh;
+    }
+  }
+}
+
+// future 영역
+#future {
+  padding: 0 0 2rem 0;
+  @include mixin.flex-layout($direction:column);
+  @include mixin.tablet {
+    margin: 0 auto;
+    width: 70%;
+    height: 70vh;
+    @include mixin.flex-layout($gap:0);
+    position: relative;
+  }
+  .future-img {
+    width: 100%;
+    height: 500px;
+    background-image: url('../images/future.png');
+    background-position: center;
+    background-size: cover;
+    @include mixin.tablet {
+      width: 50%;
+      height: 50vh;
+      border-radius: $card-radius;
+      position: absolute;
+      top: 3rem;
+      left: 6rem;
+    }
+    @include mixin.desktop {
+      height: 50vh;
+    }
+  }
+  .future {
+    @include mixin.flex-layout($direction:column);
+    position: relative;
+    top: -5rem;
+    width: 80%;
+    padding: 2rem;
+    background-color: $font-sub;
+    border-radius: $card-radius;
+    box-shadow: $base-shadow;
+    @include mixin.tablet {
+      width: 40%;
+      height: 50vh;
+      position: absolute;
+      top: 0;
+      right: 6rem;
+      @include mixin.flex-layout($direction:column,$justify:space-between,$align:flex-start);
+      button {width: 80%;}
+    }
+    @include mixin.desktop {
+      width: 40%;
+      height: 50vh;
+    }
+    div {
+      p {padding: 1rem 0;}
+    }
+  }
+}
+
+// brand 영역
+#brand {
+  padding: 2rem 0 5rem 0;
+  @include mixin.flex-layout($direction:column);
+  @include mixin.tablet {
+    height: 80vh;
+  }
+  .brand {
+    width: 400px;
+    display: grid;
+    grid-template-rows: repeat(3,1fr);
+    grid-template-columns: repeat(2,1fr);
+    @include mixin.tablet {
+      width: 600px;
+      grid-template-rows: repeat(2,1fr);
+      grid-template-columns: repeat(3,1fr); 
+    }
+    p {
+      width: 180px;
+      height: 180px;
+      margin: 0.4rem;
+      border: 10px solid $font-sub;
+      border-radius: $card-radius;
+      background-color: $font-sub;
+      background-size: contain;
+      background-position: center;
+      background-repeat: no-repeat;
+      transition: 0.3s;
+      @include mixin.tablet {
+        &:hover {transform: scale(1.1);}
+      }
+      &:nth-of-type(1) {background-image: url(../images/logo-cocacola.png);}
+      &:nth-of-type(2) {background-image: url(../images/logo-sprite.png);}
+      &:nth-of-type(3) {background-image: url(../images/logo-fanta.png);}
+      &:nth-of-type(4) {background-image: url(../images/logo-drpepper.png);}
+      &:nth-of-type(5) {background-image: url(../images/logo-powerade.png);}
+      &:nth-of-type(6) {background-image: url(../images/logo-georgia.png);}
+    }
+  }
+}
+
+// footer 영역
+footer {
+  padding: 2rem;
+  background-color: $font-main;
+  color: $font-sub;
+  @include mixin.tablet {
+    padding: 3rem 10rem;
+  }
+  @include mixin.desktop {
+    padding: 4rem 20rem;
+  }
+  .footer {
+    width: 100%;
+    @include mixin.flex-layout($direction:column,$align:flex-start);
+    .f-head {
+      width: 100%;
+      @include mixin.tablet {
+        @include mixin.flex-layout($justify:space-between);
+      }
+      .f-logo {
+        padding: 2rem 0;
+      }
+      button {
+        @include mixin.flex-layout();
+        width: 100%;
+        height: 35px;
+        border: 2px solid $font-sub;
+        border-radius: $card-radius;
+        background-color: $font-main;
+        color: $font-sub;
+        @include mixin.tablet {width: 150px;}
+        &:hover {
+          background-color: #333;
+        }
+      }
+    }
+    .f-menu {
+      width: 100%;
+      border-top: 1px solid $font-sub;
+      border-bottom: 1px solid $font-sub;
+      padding: 0.5rem 0;
+      @include mixin.tablet {
+        @include mixin.flex-layout($justify:flex-start);
+      }
+      .f-menu-1,.f-menu-2,.f-menu-3 {
+        padding: 0.6rem 0;
+        @include mixin.flex-layout($justify:space-between);
+        @include mixin.tablet {
+          width: 250px;
+          height: 250px;
+          @include mixin.flex-layout(
+            $direction:column,
+            $justify:flex-start,
+            $align:flex-start);
+          img {display: none;}
+          h3 {font-size: small; font-weight: 200;}
+        }
+      }
+      .menu-sub {
+        display: none;
+        @include mixin.tablet {
+          display: block;
+        }
+        p {
+          cursor: pointer;
+          padding: 0.5rem;
+          @include mixin.tablet {
+            font-weight: bold;
+          }
+        }
+      }
+    }
+    .end {
+      width: 100%;
+      @include mixin.flex-layout($direction:column,$align:flex-start);
+      @include mixin.tablet {
+        @include mixin.flex-layout($justify:space-between);
+      }
+      .f-sns {
+        cursor: pointer;
+        @include mixin.flex-layout();
+        img {
+          width: 25px;
+          height: 25px;
+          padding: 3px;
+          border: 2px solid $font-sub;
+          border-radius: 50%;
+        }
+      }
+      .f-store {
+        padding: 0.6rem 0;
+        @include mixin.flex-layout();
+        img {
+          height: 40px;
+          border: 1px solid $font-sub;
+          border-radius: 8px;
+        }
+        @include mixin.tablet {display: none;}
+      }
+      p {
+        font-size: small;
+      }
+    }
+  }
+}
