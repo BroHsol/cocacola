@@ -100,7 +100,8 @@ header {
         background-image: url('../images/icons/menu.png');}
     }
     // menu-icon 클릭 반응
-    input[id=menu-check]:checked ~ .t-menu-m {opacity: 1;}
+    input[id=menu-check]:checked ~ .t-menu-m {
+      opacity: 1; z-index: 13;}
     input[id=menu-check]:checked ~ .menu-icon > div {
       background-image: url('../images/icons/close.png');}
 
@@ -110,7 +111,7 @@ header {
     }
     .t-menu-m {
       width: 100%;
-      height: 85vh;
+      height: 70vh;
       background-color: $font-sub;
       font-size: x-large;
       font-weight: bolder;
@@ -120,7 +121,6 @@ header {
       padding: 3rem;
       opacity: 0;
       @include mixin.flex-layout($direction:column,$justify:flex-start,$align:flex-start);
-      z-index: 13;
       li{
         width: 100%;
         cursor: pointer;

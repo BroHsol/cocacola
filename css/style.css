@@ -148,6 +148,7 @@ header nav label div {
 }
 header nav input[id=menu-check]:checked ~ .t-menu-m {
   opacity: 1;
+  z-index: 13;
 }
 header nav input[id=menu-check]:checked ~ .menu-icon > div {
   background-image: url("../images/icons/close.png");
@@ -162,7 +163,7 @@ header nav .menu-icon {
 }
 header nav .t-menu-m {
   width: 100%;
-  height: 85vh;
+  height: 70vh;
   background-color: #fff;
   font-size: x-large;
   font-weight: bolder;
@@ -176,7 +177,6 @@ header nav .t-menu-m {
   justify-content: flex-start;
   align-items: flex-start;
   gap: 1rem;
-  z-index: 13;
 }
 header nav .t-menu-m li {
   width: 100%;
